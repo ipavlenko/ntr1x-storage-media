@@ -64,7 +64,7 @@ public class PublicationService implements IPublicationService {
 			em.flush();
 			
 			security.register(p, ResourceUtils.alias(null, "publications/i", p));
-			security.grant(user, p.getAlias(), "admin");
+			security.grant(p.getScope(), user, p.getAlias(), "admin");
 		}
 		
 		return p;
@@ -77,7 +77,6 @@ public class PublicationService implements IPublicationService {
 			
 			Image thumbnail = update.thumbnail == null ? null : images.select(scope, update.thumbnail);
 			
-			p.setScope(scope);
 			p.setTitle(update.title);
 			p.setSubtitle(update.subtitle);
 			p.setPromo(update.promo);
