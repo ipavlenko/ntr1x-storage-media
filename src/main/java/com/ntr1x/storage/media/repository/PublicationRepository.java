@@ -16,7 +16,7 @@ public interface PublicationRepository extends JpaRepository<Publication, Long> 
         " SELECT p"
       + " FROM Publication p"
       + " WHERE (:scope IS NULL OR p.scope = :scope)"
-      + "	AND (:user IS NULL OR p.user.id = :user)"
+      + "	AND (:user IS NULL OR (:user = 0 AND p.user IS NULL) OR p.user.id = :user)"
       + "	AND (:relate IS NULL OR (:relate = 0 AND p.relate IS NULL) OR p.relate.id = :relate)"
       + "	AND (:since IS NULL OR p.published >= :since)"
       + "	AND (:until IS NULL OR p.published <= :until)"

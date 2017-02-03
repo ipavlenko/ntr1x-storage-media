@@ -36,7 +36,7 @@ import io.swagger.annotations.ApiParam;
 
 @Api("Media")
 @Component
-@Path("/publications")
+@Path("/media/publications")
 @PermitAll
 public class PublicationResource {
 

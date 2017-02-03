@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.ntr1x.storage.core.converter.ConverterProvider.LocalDateTimeConverter;
 import com.ntr1x.storage.media.model.Publication;
 import com.ntr1x.storage.uploads.services.IImageService.RelatedImage;
@@ -49,11 +50,10 @@ public interface IPublicationService {
     public static class PublicationCreate {
         
 		public Long relate;
-		public long user;
+		public Long user;
 		
 		@NotBlank
     	public String title;
-        
         public String subtitle;
     	public String promo;
     	public String body;
@@ -62,7 +62,10 @@ public interface IPublicationService {
     	@ApiModelProperty(example="2016-10-07T04:05")
         public LocalDateTime published;
     	
-    	public Long thumbnail;
+    	@ApiModelProperty(dataType = "Object")
+    	public JsonNode extra;
+    	
+    	public Long image;
     	
     	public RelatedImage[] images;
     }
@@ -74,7 +77,6 @@ public interface IPublicationService {
 		
 		@NotBlank
     	public String title;
-        
         public String subtitle;
     	public String promo;
     	public String body;
@@ -83,7 +85,10 @@ public interface IPublicationService {
     	@ApiModelProperty(example="2016-10-07T04:05")
         public LocalDateTime published;
     	
-    	public Long thumbnail;
+    	@ApiModelProperty(dataType = "Object")
+    	public JsonNode extra;
+    	
+    	public Long image;
     	
     	public RelatedImage[] images;
     }

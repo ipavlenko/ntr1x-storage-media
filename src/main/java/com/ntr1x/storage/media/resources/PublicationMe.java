@@ -33,7 +33,7 @@ import io.swagger.annotations.ApiParam;
 
 @Api("Me")
 @Component
-@Path("/me/publications")
+@Path("/me/media/publications")
 @PermitAll
 public class PublicationMe {
 

@@ -46,19 +46,20 @@ public class PublicationService implements IPublicationService {
 		
 		Publication p = new Publication(); {
 			
-			User user = users.select(scope, create.user);
+			User user = create.user == null ? null : users.select(scope, create.user);
 			Resource relate = create.relate == null ? null : resources.select(scope, create.relate);
-			Image thumbnail = create.thumbnail == null ? null : images.select(scope, create.thumbnail);
+			Image image = create.image == null ? null : images.select(scope, create.image);
 			
 			p.setScope(scope);
 			p.setUser(user);
 			p.setRelate(relate);
+			p.setImage(image);
 			p.setTitle(create.title);
 			p.setSubtitle(create.subtitle);
 			p.setPromo(create.promo);
 			p.setBody(create.body);
 			p.setPublished(create.published);
-			p.setThumbnail(thumbnail);
+			p.setExtra(create.extra);
 			
 			em.persist(p);
 			em.flush();
@@ -75,14 +76,15 @@ public class PublicationService implements IPublicationService {
 		
 		Publication p = publications.select(scope, id); {
 			
-			Image thumbnail = update.thumbnail == null ? null : images.select(scope, update.thumbnail);
+			Image image = update.image == null ? null : images.select(scope, update.image);
 			
+			p.setImage(image);
 			p.setTitle(update.title);
 			p.setSubtitle(update.subtitle);
 			p.setPromo(update.promo);
 			p.setBody(update.body);
 			p.setPublished(update.published);
-			p.setThumbnail(thumbnail);
+			p.setExtra(update.extra);
 			
 			em.merge(p);
 			em.flush();

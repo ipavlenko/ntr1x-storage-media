@@ -47,8 +47,14 @@ public class Publication extends Resource {
 	@XmlElement
 	@JsonManagedReference
 	@ManyToOne
-	@JoinColumn(name = "UserId", nullable = false, updatable = false)
+	@JoinColumn(name = "UserId", nullable = true, updatable = false)
 	private User user;
+	
+	@XmlElement
+	@JsonManagedReference
+	@ManyToOne
+	@JoinColumn(name = "ImageId", nullable = true)
+	private Image image;
 	
 	@Column(name = "Title", nullable = false)
 	private String title;
@@ -68,9 +74,4 @@ public class Publication extends Resource {
 	@XmlJavaTypeAdapter(LocalDateTimeConverter.class)
 	@ApiModelProperty(example="2016-10-07T04:05")
 	private LocalDateTime published;
-	
-	@XmlElement
-    @ManyToOne
-	@JoinColumn(name = "ThumbnailId", nullable = true)
-	private Image thumbnail;
 }
