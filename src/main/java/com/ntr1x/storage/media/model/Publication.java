@@ -59,7 +59,7 @@ public class Publication extends Resource {
 	@Column(name = "Title", nullable = false)
 	private String title;
 	
-	@Column(name = "Subtitle", nullable = false)
+	@Column(name = "Subtitle", nullable = true)
 	private String subtitle;
 	
 	@Lob
