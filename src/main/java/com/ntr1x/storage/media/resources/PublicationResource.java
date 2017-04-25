@@ -40,41 +40,41 @@ import io.swagger.annotations.ApiParam;
 @PermitAll
 public class PublicationResource {
 
-	@Inject
-	private IPublicationService publications;
-	
-	@Inject
-	private Provider<IUserScope> scope;
-	
-	@GET
+    @Inject
+    private IPublicationService publications;
+    
+    @Inject
+    private Provider<IUserScope> scope;
+    
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public PublicationPageResponse shared(
-		@QueryParam("user") Long user,
-		@QueryParam("relate") Long relate,
-		@QueryParam("since") @ApiParam(example = "2016-10-01T17:30") LocalDateTime since,
-		@QueryParam("until") @ApiParam(example = "2016-10-01T21:00") LocalDateTime until,
-		@BeanParam PageableQuery pageable
+        @QueryParam("user") Long user,
+        @QueryParam("relate") Long relate,
+        @QueryParam("since") @ApiParam(example = "2016-10-01T17:30") LocalDateTime since,
+        @QueryParam("until") @ApiParam(example = "2016-10-01T21:00") LocalDateTime until,
+        @BeanParam PageableQuery pageable
     ) {
-    	
+        
         Page<Publication> p = publications.query(
-    		scope.get().getId(),
-			user,
-			relate,
-			since,
-			until,
-			pageable.toPageRequest()
-		);
+            scope.get().getId(),
+            user,
+            relate,
+            since,
+            until,
+            pageable.toPageRequest()
+        );
         
         return new PublicationPageResponse(
-    		p.getTotalElements(),
-    		p.getNumber(),
-    		p.getSize(),
-    		p.getContent()
-		);
+            p.getTotalElements(),
+            p.getNumber(),
+            p.getSize(),
+            p.getContent()
+        );
     }
-	
-	@POST
+    
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
@@ -82,20 +82,20 @@ public class PublicationResource {
     public Publication create(@Valid PublicationCreate create) {
 
         return publications.create(scope.get().getId(), create);
-	}
-	
-	@PUT
-	@Path("/i/{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	@Transactional
-	@RolesAllowed({ "res:///publications/i/{id}:admin" })
-	public Publication update(@PathParam("id") long id, @Valid PublicationUpdate update) {
-	    
-	    return publications.update(scope.get().getId(), id, update);
-	}
-	
-	@GET
+    }
+    
+    @PUT
+    @Path("/i/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    @RolesAllowed({ "res:///publications/i/{id}:admin" })
+    public Publication update(@PathParam("id") long id, @Valid PublicationUpdate update) {
+        
+        return publications.update(scope.get().getId(), id, update);
+    }
+    
+    @GET
     @Path("/i/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
@@ -104,14 +104,14 @@ public class PublicationResource {
         
         return publications.select(scope.get().getId(), id);
     }
-	
-	@DELETE
+    
+    @DELETE
     @Path("/i/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     @RolesAllowed({ "res:///publications/i/{id}:admin" })
     public Publication remove(@PathParam("id") long id) {
         
-	    return publications.remove(scope.get().getId(), id);
+        return publications.remove(scope.get().getId(), id);
     }
 }

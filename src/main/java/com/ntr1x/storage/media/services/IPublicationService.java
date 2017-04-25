@@ -21,75 +21,75 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 public interface IPublicationService {
-	
-	Publication create(long scope, PublicationCreate create);
-	Publication update(Long scope, long id, PublicationUpdate update);
-	
-	Publication select(Long scope, long id);
-	
-	Page<Publication> query(Long scope, Long user, Long relate, LocalDateTime since, LocalDateTime until, Pageable pageable);
-	
-	Publication remove(Long scope, long id);
-	
-	@XmlRootElement
+    
+    Publication create(long scope, PublicationCreate create);
+    Publication update(Long scope, long id, PublicationUpdate update);
+    
+    Publication select(Long scope, long id);
+    
+    Page<Publication> query(Long scope, Long user, Long relate, LocalDateTime since, LocalDateTime until, Pageable pageable);
+    
+    Publication remove(Long scope, long id);
+    
+    @XmlRootElement
     @NoArgsConstructor
     @AllArgsConstructor
     public static class PublicationPageResponse {
 
-    	public long count;
+        public long count;
         public int page;
         public int size;
 
         @XmlElement
         public List<Publication> content;
-	}
-	
-	@XmlRootElement
+    }
+    
+    @XmlRootElement
     @NoArgsConstructor
     @AllArgsConstructor
     public static class PublicationCreate {
         
-		public Long relate;
-		public Long user;
-		
-		@NotBlank
-    	public String title;
+        public Long relate;
+        public Long user;
+        
+        @NotBlank
+        public String title;
         public String subtitle;
-    	public String promo;
-    	public String body;
-    	
-    	@XmlJavaTypeAdapter(LocalDateTimeConverter.class)
-    	@ApiModelProperty(example="2016-10-07T04:05")
+        public String promo;
+        public String body;
+        
+        @XmlJavaTypeAdapter(LocalDateTimeConverter.class)
+        @ApiModelProperty(example="2016-10-07T04:05")
         public LocalDateTime published;
-    	
-    	@ApiModelProperty(dataType = "Object")
-    	public JsonNode extra;
-    	
-    	public Long image;
-    	
-    	public RelatedImage[] images;
+        
+        @ApiModelProperty(dataType = "Object")
+        public JsonNode extra;
+        
+        public Long image;
+        
+        public RelatedImage[] images;
     }
     
     @XmlRootElement
     @NoArgsConstructor
     @AllArgsConstructor
     public static class PublicationUpdate {
-		
-		@NotBlank
-    	public String title;
+        
+        @NotBlank
+        public String title;
         public String subtitle;
-    	public String promo;
-    	public String body;
-    	
-    	@XmlJavaTypeAdapter(LocalDateTimeConverter.class)
-    	@ApiModelProperty(example="2016-10-07T04:05")
+        public String promo;
+        public String body;
+        
+        @XmlJavaTypeAdapter(LocalDateTimeConverter.class)
+        @ApiModelProperty(example="2016-10-07T04:05")
         public LocalDateTime published;
-    	
-    	@ApiModelProperty(dataType = "Object")
-    	public JsonNode extra;
-    	
-    	public Long image;
-    	
-    	public RelatedImage[] images;
+        
+        @ApiModelProperty(dataType = "Object")
+        public JsonNode extra;
+        
+        public Long image;
+        
+        public RelatedImage[] images;
     }
 }

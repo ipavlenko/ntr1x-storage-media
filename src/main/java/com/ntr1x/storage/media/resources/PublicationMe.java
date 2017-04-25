@@ -37,7 +37,7 @@ import io.swagger.annotations.ApiParam;
 @PermitAll
 public class PublicationMe {
 
-	@Inject
+    @Inject
     private IPublicationService publications;
 
     @Inject
@@ -51,27 +51,27 @@ public class PublicationMe {
     @Transactional
     @RolesAllowed({ "auth" })
     public PublicationPageResponse query(
-		@QueryParam("relate") Long relate,
-		@QueryParam("since") @ApiParam(example = "2016-10-01T17:30") LocalDateTime since,
-		@QueryParam("until") @ApiParam(example = "2016-10-01T21:00") LocalDateTime until,
-		@BeanParam PageableQuery pageable
+        @QueryParam("relate") Long relate,
+        @QueryParam("since") @ApiParam(example = "2016-10-01T17:30") LocalDateTime since,
+        @QueryParam("until") @ApiParam(example = "2016-10-01T21:00") LocalDateTime until,
+        @BeanParam PageableQuery pageable
     ) {
-    	
-    	Page<Publication> p = publications.query(
-    		scope.get().getId(),
-			principal.get().getUser().getId(),
-			relate,
-			since,
-			until,
-			pageable.toPageRequest()
-		);
+        
+        Page<Publication> p = publications.query(
+            scope.get().getId(),
+            principal.get().getUser().getId(),
+            relate,
+            since,
+            until,
+            pageable.toPageRequest()
+        );
         
         return new PublicationPageResponse(
-    		p.getTotalElements(),
-    		p.getNumber(),
-    		p.getSize(),
-    		p.getContent()
-		);
+            p.getTotalElements(),
+            p.getNumber(),
+            p.getSize(),
+            p.getContent()
+        );
     }
 
     @POST
@@ -81,8 +81,8 @@ public class PublicationMe {
     @RolesAllowed({ "auth" })
     public Publication create(@Valid PublicationCreate create) {
 
-    	create.user = principal.get().getUser().getId();
-    	
+        create.user = principal.get().getUser().getId();
+        
         return publications.create(scope.get().getId(), create);
-	}
+    }
 }

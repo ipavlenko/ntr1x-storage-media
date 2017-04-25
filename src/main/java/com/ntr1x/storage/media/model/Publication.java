@@ -32,46 +32,46 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(
-	name = "publications"
+    name = "publications"
 )
 @PrimaryKeyJoinColumn(name = "ResourceId", referencedColumnName = "Id")
 @CascadeOnDelete
 public class Publication extends Resource {
 
-	@XmlElement
-	@JsonManagedReference
-	@ManyToOne
+    @XmlElement
+    @JsonManagedReference
+    @ManyToOne
     @JoinColumn(name = "RelateId", nullable = true, updatable = false)
     private Resource relate;
-	
-	@XmlElement
-	@JsonManagedReference
-	@ManyToOne
-	@JoinColumn(name = "UserId", nullable = true, updatable = false)
-	private User user;
-	
-	@XmlElement
-	@JsonManagedReference
-	@ManyToOne
-	@JoinColumn(name = "ImageId", nullable = true)
-	private Image image;
-	
-	@Column(name = "Title", nullable = false)
-	private String title;
-	
-	@Column(name = "Subtitle", nullable = true)
-	private String subtitle;
-	
-	@Lob
-	@Column(name = "Promo", nullable = true)
-	private String promo;
-	
-	@Lob
-	@Column(name = "Body", nullable = true)
-	private String body;
-	
-	@Column(name = "Published")
-	@XmlJavaTypeAdapter(LocalDateTimeConverter.class)
-	@ApiModelProperty(example="2016-10-07T04:05")
-	private LocalDateTime published;
+    
+    @XmlElement
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "UserId", nullable = true, updatable = false)
+    private User user;
+    
+    @XmlElement
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "ImageId", nullable = true)
+    private Image image;
+    
+    @Column(name = "Title", nullable = false)
+    private String title;
+    
+    @Column(name = "Subtitle", nullable = true)
+    private String subtitle;
+    
+    @Lob
+    @Column(name = "Promo", nullable = true)
+    private String promo;
+    
+    @Lob
+    @Column(name = "Body", nullable = true)
+    private String body;
+    
+    @Column(name = "Published")
+    @XmlJavaTypeAdapter(LocalDateTimeConverter.class)
+    @ApiModelProperty(example="2016-10-07T04:05")
+    private LocalDateTime published;
 }
