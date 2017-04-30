@@ -78,7 +78,7 @@ public class PublicationResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    @RolesAllowed({ "res:///publications:admin" })
+    @RolesAllowed({ "res:///publications/:admin" })
     public Publication create(@Valid PublicationCreate create) {
 
         return publications.create(scope.get().getId(), create);
@@ -89,7 +89,7 @@ public class PublicationResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    @RolesAllowed({ "res:///publications/i/{id}:admin" })
+    @RolesAllowed({ "res:///publications/i/{id}/:admin" })
     public Publication update(@PathParam("id") long id, @Valid PublicationUpdate update) {
         
         return publications.update(scope.get().getId(), id, update);
@@ -99,7 +99,7 @@ public class PublicationResource {
     @Path("/i/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    @RolesAllowed({ "res:///publications/i/{id}:admin" })
+    @RolesAllowed({ "res:///publications/i/{id}/:admin" })
     public Publication select(@PathParam("id") long id) {
         
         return publications.select(scope.get().getId(), id);
@@ -109,7 +109,7 @@ public class PublicationResource {
     @Path("/i/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    @RolesAllowed({ "res:///publications/i/{id}:admin" })
+    @RolesAllowed({ "res:///publications/i/{id}/:admin" })
     public Publication remove(@PathParam("id") long id) {
         
         return publications.remove(scope.get().getId(), id);
